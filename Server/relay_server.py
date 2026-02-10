@@ -58,8 +58,9 @@ async def handler(websocket):
                     print(f"Room closed: {room_id}")
 
 async def main():
-    async with websockets.serve(handler, "localhost", 8765):
-        print("Relay Server started on ws://localhost:8765")
+    # Listen on all interfaces (0.0.0.0) so other computers can connect
+    async with websockets.serve(handler, "0.0.0.0", 8765):
+        print("Relay Server started on ws://0.0.0.0:8765 (Listening for external connections)")
         await asyncio.Future()  # run forever
 
 if __name__ == "__main__":

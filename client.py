@@ -161,6 +161,10 @@ class RTC_OT_SyncHandler(bpy.types.Operator):
                 obj.rotation_euler = data['rotation']
                 obj.scale = data['scale']
                 
+                # Force update
+                obj.keyframe_insert(data_path="location", frame=context.scene.frame_current) if obj.animation_data else None
+                context.view_layer.update()
+                
                 # Update our "last known" so we don't think it changed locally next tick
                 self._last_transforms[obj_name] = (
                     tuple(obj.location), 
@@ -169,6 +173,8 @@ class RTC_OT_SyncHandler(bpy.types.Operator):
                 )
                 
                 self._updating_remote = False
+            else:
+                 print(f"RTC Warning: Object '{obj_name}' not found in this scene!")
 
     def check_local_changes(self, context):
         if self._updating_remote:

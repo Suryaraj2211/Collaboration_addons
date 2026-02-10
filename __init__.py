@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Real-Time Collaboration",
     "author": "Antigravity",
-    "version": (0, 0, 1),
+    "version": (0, 0, 2),
     "blender": (2, 80, 0),
     "location": "View3D > N-Panel > Collaboration",
     "description": "Real-time collaboration add-on for Blender",

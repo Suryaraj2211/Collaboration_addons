@@ -85,12 +85,15 @@ class RTC_OT_Connect(bpy.types.Operator):
         t.start()
         
         # Determine initial action
+        # Capture values locally to avoid ReferenceError in thread
+        action_type = self.action
+        code = context.scene.rtc_room_code
+
         def send_init_action():
-            time.sleep(0.5) # Wait for connection
-            if self.action == "host":
+            time.sleep(1.0) # Wait for connection (increased to 1s)
+            if action_type == "host":
                 send_queue.put({"action": "host"})
-            elif self.action == "join":
-                code = context.scene.rtc_room_code
+            elif action_type == "join":
                 send_queue.put({"action": "join", "room_id": code})
         
         threading.Thread(target=send_init_action, daemon=True).start()
@@ -145,6 +148,7 @@ class RTC_OT_SyncHandler(bpy.types.Operator):
         elif msg_type == "update":
             data = msg.get("data")
             obj_name = data.get("name")
+            print(f"RTC: Received update for '{obj_name}'")
             
             if obj_name in context.scene.objects:
                 obj = context.scene.objects[obj_name]
@@ -186,6 +190,7 @@ class RTC_OT_SyncHandler(bpy.types.Operator):
             self._last_transforms[obj.name] = current_transform
             
             # Send Update
+            print(f"RTC: Sending update for '{obj.name}'")
             update_data = {
                 "name": obj.name,
                 "location": list(obj.location),

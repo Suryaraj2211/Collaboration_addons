@@ -44,10 +44,12 @@ Before anyone can connect, the "Relay Server" must be running. This acts as the 
 *   Share the **Room Code** shown in the system console with User B.
 
 **User B (Joiner):**
-*   Open the **Collaboration** tab.
-*   Enter the Server URL (e.g., `ws://192.168.1.5:8765` if on a different machine).
-*   Enter the **Room Code**.
-*   Click **Join Session**.
+1.  Open the **Collaboration** tab.
+2.  **CRITICAL:** Do NOT use `localhost` if you are on a different computer!
+    *   Ask User A for their IP Address (e.g., `192.168.1.5`).
+    *   Enter: `ws://192.168.1.5:8765`
+3.  Enter the **Room Code**.
+4.  Click **Join Session**.
 
 ### 3. Collaborate!
 Select an object and move it. It will move for everyone else in the session! 🚀

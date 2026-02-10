@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.blend
+*.blend1
+*.zip
+.vscode/
+.idea/

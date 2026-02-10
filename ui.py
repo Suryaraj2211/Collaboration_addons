@@ -18,6 +18,9 @@ class RTC_PT_MainPanel(bpy.types.Panel):
         layout.label(text="Session Control")
         
         row = layout.row()
+        row.prop(scene, "rtc_server_url", text="Server")
+
+        row = layout.row()
         op = row.operator("rtc.connect", text="Host Session")
         op.action = "host"
         

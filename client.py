@@ -88,6 +88,7 @@ class RTC_OT_Connect(bpy.types.Operator):
         # Capture values locally to avoid ReferenceError in thread
         action_type = self.action
         code = context.scene.rtc_room_code
+        
 
         def send_init_action():
             time.sleep(1.0) # Wait for connection (increased to 1s)
